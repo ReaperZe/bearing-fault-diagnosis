@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.DS_Store
+
+# dataset (large, download with download_data.py)
+data/cwru/*.mat
+
+# generated outputs
+*.joblib
+results/*.png
