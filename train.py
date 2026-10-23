@@ -1,28 +1,3 @@
-"""
-Predictive Maintenance: Bearing Fault Diagnosis on the CWRU Bearing Dataset
----------------------------------------------------------------------------
-Pipeline:
-  1. Download CWRU 12 kHz drive-end .mat files
-  2. Split BEFORE windowing (no data leakage) -> train / val / test
-  3. Window signals, extract time-domain + FFT features
-  4. Train Random Forest + XGBoost, tune on VALIDATION set
-  5. Evaluate ONCE on the held-out TEST set
-
-Install:  pip install numpy scipy pandas scikit-learn matplotlib joblib xgboost
-
-Dataset page (manual download if auto-download fails):
-  https://engineering.case.edu/bearingdatacenter/download-data-file
-  -> put the .mat files (97.mat, 105.mat, ...) into ./data/cwru/
-
-Split modes (SPLIT_MODE):
-  "segment": every recording is cut in time order -> first 70% train,
-             next 15% val, last 15% test (a gap is left between them).
-             All fault classes appear in all splits.
-  "file"   : whole recordings are assigned to train/val/test.
-             Stricter test (model must generalise to unseen recordings /
-             loads), but with only 4 Normal files the numbers are noisier.
-"""
-
 import os
 import urllib.request
 import warnings
