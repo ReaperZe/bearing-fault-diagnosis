@@ -43,7 +43,44 @@ Outer race (6 o'clock): 130-133, 197-200, 234-237. If automatic download fails, 
 https://engineering.case.edu/bearingdatacenter/download-data-file and place them in `data/cwru/`.
 
 ## Results
-_Add your test accuracy / macro-F1 and confusion matrix here after running._
+
+**Split mode:** `segment` (70% train / 15% val / 15% test, chronological per recording)
+**Best model (selected on validation):** Random Forest (n_estimators=100, max_depth=None)
+
+### Validation macro-F1 (model selection)
+
+| Model | Macro-F1 |
+|---|---|
+| RF (n=100, depth=None) | 1.0000 |
+| RF (n=100, depth=12) | 1.0000 |
+| RF (n=300, depth=None) | 1.0000 |
+| RF (n=300, depth=12) | 1.0000 |
+| XGBoost (depth=4, lr=0.05) | 0.9970 |
+| XGBoost (depth=4, lr=0.1) | 0.9970 |
+| XGBoost (depth=6, lr=0.05) | 0.9970 |
+| XGBoost (depth=6, lr=0.1) | 0.9970 |
+
+### Test set performance
+
+| Class | Precision | Recall | F1-score | Support |
+|---|---|---|---|---|
+| Normal | 1.0000 | 1.0000 | 1.0000 | 242 |
+| InnerRace | 1.0000 | 1.0000 | 1.0000 | 193 |
+| Ball | 1.0000 | 1.0000 | 1.0000 | 192 |
+| OuterRace | 1.0000 | 1.0000 | 1.0000 | 192 |
+| **Accuracy** | | | **1.0000** | **819** |
+| **Macro avg** | 1.0000 | 1.0000 | 1.0000 | 819 |
+| **Weighted avg** | 1.0000 | 1.0000 | 1.0000 | 819 |
+
+> Note: `segment` mode tests on later time segments of the *same* recordings used for training,
+> so it measures within-recording performance. See the `file` mode result below for
+> generalisation to unseen recordings.
+
+| Split mode | Test accuracy | Test macro-F1 |
+|---|---|---|
+| segment | 1.0000 | 1.0000 |
+| file | _run and fill in_ | _run and fill in_ |
+
 
 ## Roadmap
 - Remaining useful life (RUL) regression on the NASA/IMS run-to-failure dataset
